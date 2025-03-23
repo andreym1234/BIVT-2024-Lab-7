@@ -45,15 +45,15 @@ namespace Lab_7
             {
                 get
                 {
-                    if (_penaltytimes == null) return true;
+                    if (_penaltytimes == null) return false;
                     for (int i = 0; i < _penaltytimes.Length; i++)
                     {
                         if (_penaltytimes[i] == 10)
                         {
-                            return false;
+                            return true;
                         }
                     }
-                    return true;
+                    return false;
                 }
             }
 
@@ -111,17 +111,6 @@ namespace Lab_7
         //класс-наследник
         public class BasketballPlayer : Participant
         {
-            private int[] _fouls;
-            public int[] Fouls
-            {
-                get
-                {
-                    if (_fouls == null) return null;
-                    int[] results = new int[_fouls.Length];
-                    Array.Copy(_fouls, results, results.Length);
-                    return results;
-                }
-            }
             public BasketballPlayer(string name, string surname) : base(name, surname)
             {
             }
@@ -129,15 +118,15 @@ namespace Lab_7
             {
                 get
                 {
-                    if (_fouls == null) return false;
+                    if (_penaltytimes == null) return false;
                     int count = 0;
-                    for (int i = 0; i < _fouls.Length; i++)
+                    for (int i = 0; i < _penaltytimes.Length; i++)
                     {
-                        if (_fouls[i] == 5) count++;
+                        if (_penaltytimes[i] == 5) count++;
                     }
-                    for (int i = 0; i < _fouls.Length; i++)
+                    for (int i = 0; i < _penaltytimes.Length; i++)
                     {
-                        if (_fouls.Sum() == 2 * _fouls.Length || count > 0.1 * _fouls.Length)
+                        if (_penaltytimes.Sum() == 2 * _penaltytimes.Length || count > 0.1 * _penaltytimes.Length)
                         {
                             return true;
                         }
@@ -147,9 +136,9 @@ namespace Lab_7
             }
             public override void PlayMatch(int foul)
             {
-                if (_fouls == null && foul < 0 && foul>5) return;
-                Array.Resize(ref _fouls, _fouls.Length + 1);
-                _fouls[_fouls.Length - 1] = foul;
+                if (_penaltytimes == null && foul < 0 && foul>5) return;
+                Array.Resize(ref _penaltytimes, _penaltytimes.Length + 1);
+                _penaltytimes[_penaltytimes.Length - 1] = foul;
             }
         }
         //класс-наследник
@@ -174,15 +163,15 @@ namespace Lab_7
             {
                 get
                 {
-                    if (_penaltytimes == null) return true;
+                    if (_penaltytimes == null) return false;
                     for (int i = 0; i < _penaltytimes.Length; i++)
                     {
                         if (_penaltytimes[i] == 10 || _penaltytimes.Sum() > 0.1 * _alltime / _count)
                         {
-                            return false;
+                            return true;
                         }
                     }
-                    return true;
+                    return false;
                 }
             }
         }

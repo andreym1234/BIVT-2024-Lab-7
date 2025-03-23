@@ -31,6 +31,7 @@ namespace Lab_7
             // остальные методы
             public void SetPlace(int place)
             {
+                if (_place != 0) return;
                 _place = place;
             }
             public void Print()
@@ -39,7 +40,6 @@ namespace Lab_7
             }
         }
         // другой класс
-        // другая структура
         public abstract class Team
         {
             // поля

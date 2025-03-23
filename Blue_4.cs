@@ -73,9 +73,9 @@ namespace Lab_7
             }
         }
         //класс-наследник
-        public class WomenTeam : Team
+        public class WomanTeam : Team
         {
-            public WomenTeam(string name) : base(name)
+            public WomanTeam(string name) : base(name)
             {
             }
         }
@@ -85,24 +85,24 @@ namespace Lab_7
             //поля
             private string _name;
             private Team[] _manteams;
-            private Team[] _womenteams;
+            private Team[] _womanteams;
             private int _mancount;
-            private int _womencount;
+            private int _womancount;
 
             //свойства
             public string Name { get { return _name; } }
             public Team[] ManTeams { get { return _manteams; } }
-            public Team[] WomenTeams { get { return _womenteams; } }
+            public Team[] WomanTeams { get { return _womanteams; } }
 
             //конструктор
             public Group(string name)
             {
                 _name = name;
                 _manteams = new Team[12];
-                _womenteams = new Team[12];
+                _womanteams = new Team[12];
 
                 _mancount = 0;
-                _womencount = 0;
+                _womancount = 0;
             }
 
             //остальные методы
@@ -112,9 +112,9 @@ namespace Lab_7
                 {
                     _manteams[_mancount++] = manteam;
                 }
-                else if (team is WomenTeam womenteam && _womencount < _womenteams.Length)
+                else if (team is WomanTeam womanteam && _womancount < _womanteams.Length)
                 {
-                    _womenteams[_womencount++] = womenteam;
+                    _womanteams[_womancount++] = womanteam;
                 }
             }
             public void Add(Team[] teams)
@@ -141,13 +141,13 @@ namespace Lab_7
             public void Sort()
             {
                 SortSeparately(_manteams);
-                SortSeparately(_womenteams);
+                SortSeparately(_womanteams);
             }
             public static Group Merge(Group group1, Group group2, int size)
             {
                 Group merged = new Group("Финалисты");
                 MergeSeparately(group1._manteams, group2._manteams, size / 2);
-                MergeSeparately(group1._womenteams, group2._womenteams, size / 2);
+                MergeSeparately(group1._womanteams, group2._womanteams, size / 2);
                 return merged;
             }
             public static void MergeSeparately(Team[] teams1, Team[] teams2, int size)

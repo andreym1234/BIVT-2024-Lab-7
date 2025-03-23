@@ -13,7 +13,6 @@ namespace Lab_7
             private string _name;
             private int _bank;
             private Participant[] _participants;
-            private int _count;
 
             public string Name => _name;
             public int Bank => _bank;
@@ -27,27 +26,21 @@ namespace Lab_7
                 _bank = bank;
                 _participants = new Participant[0];
 
-                _count = 0;
             }
 
-            public void Add(Participant participants)
+            public void Add(Participant participant)
             {
-                if (_participants == null || _count >= _participants.Length) return;
-                if (_count < _participants.Length)
-                {
-                    _participants[_count++] = participants;
-                }
+                if (_participants == null) return;
+                Array.Resize(ref _participants, _participants.Length + 1);
+                _participants[_participants.Length - 1] = participant;
+
             }
             public void Add(Participant[] participants)
             {
-                if (_participants == null || _count >= _participants.Length) return;
-                for (int i = 0; i < _participants.Length; i++)
+                if (_participants == null) return;
+                for (int i = 0; i < participants.Length; i++)
                 {
-                    if (_count >= _participants.Length) return;
-                    if (_count < _participants.Length)
-                    {
-                        _participants[_count++] = participants[i];
-                    }
+                    Add(participants[i]);
                 }
             }
         }
@@ -102,10 +95,10 @@ namespace Lab_7
                         count++;
                     }
                     if (count > 10) count = 10;
-                    int n = 20 / count;
+                    double n = 20 / count;
                     for (int i = 0; i < count; i++)
                     {
-                        prize[count] = n * Bank;
+                        prize[i] = n * Bank / 100;
                     }
                     prize[0] += 0.4 * Bank;
                     prize[1] += 0.25 * Bank;
