@@ -87,21 +87,21 @@ namespace Lab_7
                     }
                 }
             }
-            public static Participant[] Iscluchen(Participant[] array)
-            {
-                if (array == null) return null;
-                Participant[] arr = new Participant[0];
-                for (int i = 0; i < array.Length; i++)
-                {
-                    if (array[i].IsExpelled == true)
-                    {
-                        Array.Resize(ref arr, arr.Length + 1);
-                        arr[arr.Length - 1] = array[i];
-                    }
-                }
-                return arr;
+            //public static Participant[] Iscluchen(Participant[] array)
+            //{
+            //    if (array == null) return null;
+            //    Participant[] arr = new Participant[0];
+            //    for (int i = 0; i < array.Length; i++)
+            //    {
+            //        if (array[i].IsExpelled == true)
+            //        {
+            //            Array.Resize(ref arr, arr.Length + 1);
+            //            arr[arr.Length - 1] = array[i];
+            //        }
+            //    }
+            //    return arr;
 
-            }
+            //}
 
             public void Print()
             {
@@ -113,6 +113,7 @@ namespace Lab_7
         {
             public BasketballPlayer(string name, string surname) : base(name, surname)
             {
+                _penaltytimes = new int[0];
             }
             public override bool IsExpelled
             {
@@ -136,9 +137,9 @@ namespace Lab_7
             }
             public override void PlayMatch(int foul)
             {
-                if (_penaltytimes == null && foul < 0 && foul>5) return;
-                Array.Resize(ref _penaltytimes, _penaltytimes.Length + 1);
-                _penaltytimes[_penaltytimes.Length - 1] = foul;
+                if (foul < 0 || foul>5) return;
+                base.PlayMatch(foul);
+                
             }
         }
         //класс-наследник
@@ -148,16 +149,14 @@ namespace Lab_7
             private int _count;
             public HockeyPlayer(string name, string surname) : base(name, surname)
             {
-                _alltime = 0;
-                _count = 0;
+                _penaltytimes = new int[0];
+                _count++;
             }
             public override void PlayMatch(int time)
             {
                 if (_penaltytimes == null) return;
-                Array.Resize(ref _penaltytimes, _penaltytimes.Length + 1);
-                _penaltytimes[_penaltytimes.Length - 1] = time;
+                base.PlayMatch(time);
                 _alltime += time;
-                _count++;
             }
             public override bool IsExpelled
             {
@@ -166,11 +165,12 @@ namespace Lab_7
                     if (_penaltytimes == null) return false;
                     for (int i = 0; i < _penaltytimes.Length; i++)
                     {
-                        if (_penaltytimes[i] == 10 || _penaltytimes.Sum() > 0.1 * _alltime / _count)
+                        if (_penaltytimes[i] == 10)
                         {
                             return true;
                         }
                     }
+                    if (_penaltytimes.Sum() > 0.1 * _alltime / _count) return true;
                     return false;
                 }
             }

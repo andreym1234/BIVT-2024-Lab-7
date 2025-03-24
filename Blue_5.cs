@@ -163,9 +163,9 @@ namespace Lab_7
                 return 100 * count / places;
             }
         }
-        public class WomenTeam : Team
+        public class WomanTeam : Team
         {
-            public WomenTeam(string name) : base(name)
+            public WomanTeam(string name) : base(name)
             {
             }
             protected override double GetTeamStrength()

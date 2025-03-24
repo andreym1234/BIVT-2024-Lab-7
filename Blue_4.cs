@@ -146,15 +146,16 @@ namespace Lab_7
             public static Group Merge(Group group1, Group group2, int size)
             {
                 Group merged = new Group("Финалисты");
-                MergeSeparately(group1._manteams, group2._manteams, size / 2);
-                MergeSeparately(group1._womanteams, group2._womanteams, size / 2);
+                merged.Add(MergeSeparately(group1._manteams, group2._manteams, size));
+                merged.Add(MergeSeparately(group1._womanteams, group2._womanteams, size));
                 return merged;
             }
-            public static void MergeSeparately(Team[] teams1, Team[] teams2, int size)
+            public static Team[] MergeSeparately(Team[] teams1, Team[] teams2, int size)
             {
-                Team[] resultteam = new Team[teams1.Length+teams2.Length / 2];
+                if (teams1 == null || teams2 == null) return null;
+                Team[] resultteam = new Team[size];
                 int i = 0, j = 0, k = 0;
-                while (i < size && j < size)
+                while (i < size / 2 && j < size / 2)
                 {
                     if (teams1[i].TotalScore >= teams2[j].TotalScore)
                     {
@@ -165,14 +166,15 @@ namespace Lab_7
                         resultteam[k++] = teams2[j++];
                     }
                 }
-                while (i < size)
+                while (i < size / 2)
                 {
                     resultteam[k++] = teams1[i++];
                 }
-                while (j < size)
+                while (j < size / 2)
                 {
                     resultteam[k++] = teams2[j++];
                 }
+                return resultteam;
             }
             public void Print(Team[] _teams)
             {
