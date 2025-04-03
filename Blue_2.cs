@@ -61,7 +61,6 @@ namespace Lab_7
                     if (Participants.Length < 3) {
                         return null; 
                     }
-                    Participant.Sort(Participants);
                     double[] prize = new double[3];
                     prize[0] = 0.5 * Bank;
                     prize[1] = 0.3 * Bank;
@@ -88,18 +87,12 @@ namespace Lab_7
                     {
                         return null;
                     }
-                    Participant.Sort(Participants);
-                    double[] prize = new double[Participants.Length];
-                    int count = 0;
-                    for (int i = 0; i < prize.Length / 2; i++)
-                    {
-                        count++;
-                    }
-                    if (count > 10) count = 10;
+                    int count = Math.Min(10, Participants.Length / 2);
+                    double[] prize = new double[count];
                     double n = 20.0 / count;
                     for (int i = 0; i < count; i++)
                     {
-                        prize[i] = n * Bank / 100;
+                        prize[i] += n * Bank / 100;
                     }
                     prize[0] += 0.4 * Bank;
                     prize[1] += 0.25 * Bank;

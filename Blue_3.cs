@@ -125,18 +125,16 @@ namespace Lab_7
                     {
                         if (_penaltytimes[i] == 5) count++;
                     }
-                    for (int i = 0; i < _penaltytimes.Length; i++)
+                    if (Total == 2 * _penaltytimes.Length || count > 0.1 * _penaltytimes.Length)
                     {
-                        if (_penaltytimes.Sum() == 2 * _penaltytimes.Length || count > 0.1 * _penaltytimes.Length)
-                        {
-                            return true;
-                        }
+                        return true;
                     }
                     return false;
                 }
             }
             public override void PlayMatch(int foul)
             {
+                if (_penaltytimes == null) return;
                 if (foul < 0 || foul>5) return;
                 base.PlayMatch(foul);
                 
@@ -145,8 +143,8 @@ namespace Lab_7
         //класс-наследник
         public class HockeyPlayer : Participant
         {
-            private int _alltime;
-            private int _count;
+            private static int _alltime;
+            private static int _count;
             public HockeyPlayer(string name, string surname) : base(name, surname)
             {
                 _penaltytimes = new int[0];
@@ -170,7 +168,7 @@ namespace Lab_7
                             return true;
                         }
                     }
-                    if (_penaltytimes.Sum() > 0.1 * _alltime / _count) return true;
+                    if (Total > 0.1 * _alltime / _count) return true;
                     return false;
                 }
             }
