@@ -125,7 +125,7 @@ namespace Lab_7
                     {
                         if (_penaltytimes[i] == 5) count++;
                     }
-                    if (Total >= 2 * _penaltytimes.Length || count > 0.1 * _penaltytimes.Length)
+                    if (Total > 2 * _penaltytimes.Length || count > 0.1 * _penaltytimes.Length)
                     {
                         return true;
                     }
